@@ -1,0 +1,33 @@
+# LAMMPS input
+
+units           metal
+atom_style      atomic
+atom_modify   map yes
+newton          on on
+boundary        p p p
+
+read_data       structur.data
+
+mass            1 12.011   # C
+mass            2 39.098   # K
+mass            3 15.999   # O
+
+# MACE potential
+pair_style      mace no_domain_decomposition
+pair_coeff      * * mace.model-lammps.pt C K O
+
+compute eatoms all pe
+
+dump 1 all custom 10 relax.dump id type element x y z
+
+# Run Minimazation
+reset_timestep  0
+fix             1 all box/relax tri 0.0 vmax 0.0005
+min_modify      line quadratic
+thermo          10
+thermo_style    custom step pe lx ly lz xy xz yz press pxx pyy pzz pxy pxz pyz
+min_style       cg
+minimize        0.0 1e-4 2000 20000
+write_data      structure_relaxed.lammps
+
+undump          1
