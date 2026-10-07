@@ -5,8 +5,8 @@ from pathlib import Path
 all_atoms = []
 dirs = ["soft"]
 
-for dir in dirs:
-    files = sorted(glob.glob(f"./*/{dir}/vasprun_*"))
+for d in dirs:
+    files = sorted(glob.glob(f"./*/{d}/vasprun_*"))
 
     for path in files:
         print(f"Reading {path}")
