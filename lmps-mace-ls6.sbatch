@@ -19,7 +19,4 @@ module load cuda/11.3 cudnn/8.2.1
 
 #####################################################################
 
-#source /work/09037/meohskim/vista/.mace_env/bin/activate
-
-#export LD_LIBRARY_PATH=/work/09037/meohskim/vista/.mace_env/lib/python3.11/site-packages/torch/lib:$LD_LIBRARY_PATH
 ibrun /corral/utexas/Siegel-Group/MACE_lammps/lammps/build2/lmp -in input.lammps
